@@ -1,1 +1,98 @@
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #000033, #1a1a40);
+    z-index: -2;
+}
+
+/* Гирлянды */
+.garland {
+    position: fixed;
+    background-image: radial-gradient(
+        yellow 15%,
+        transparent 20%
+    );
+    background-size: 20px 20px;
+    animation: flicker 1.5s infinite alternate;
+    z-index: -1;
+}
+
+.garland.top, .garland.bottom {
+    width: 100%;
+    height: 5px;
+}
+
+.garland.left, .garland.right {
+    height: 100%;
+    width: 5px;
+}
+
+.garland.top {
+    top: 0;
+    left: 0;
+}
+
+.garland.bottom {
+    bottom: 0;
+    left: 0;
+}
+
+.garland.left {
+    top: 0;
+    left: 0;
+}
+
+.garland.right {
+    top: 0;
+    right: 0;
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.4;
+    }
+}
+
+/* Центральное содержание */
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+#countdown {
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
