@@ -3,24 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>С Новым Годом!</title>
+    <title>С Наступающим Новым Годом!</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="garland top"></div>
-    <div class="garland right"></div>
-    <div class="garland bottom"></div>
-    <div class="garland left"></div>
+    <div class="garland-container top"></div>
+    <div class="garland-container bottom"></div>
 
     <div id="snow-container"></div>
 
     <main class="card">
-        <h1>С Новым 2026 Годом!</h1>
         
-        <p>Пусть этот год будет полон радости, волшебства и тепла.</p>
+        <h1>С Наступающим!</h1>
         
-        <img src="https://images.pexels.com/photos/314726/pexels-photo-314726.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Красивый зимний пейзаж с домиками и елкой">
+        <p>До Нового Года осталось:</p>
+        
+        <div id="countdown">
+            <div class="unit">
+                <span id="days">00</span>
+                <label>дней</label>
+            </div>
+            <div class="unit">
+                <span id="hours">00</span>
+                <label>часов</label>
+            </div>
+            <div class="unit">
+                <span id="minutes">00</span>
+                <label>минут</label>
+            </div>
+            <div class="unit">
+                <span id="seconds">00</span>
+                <label>секунд</label>
+            </div>
+        </div>
+        
+        <div class="button-container">
+            <a href="#" class="btn"><span>🎶</span> Новогодняя Музыка</a>
+            <a href="#" class="btn"><span>💌</span> Отправить Открытку</a>
+        </div>
         
         <footer>
             &copy; 2025-2026 Твой Новогодний Проект
