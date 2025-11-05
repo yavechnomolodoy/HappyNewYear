@@ -3,60 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>С Наступающим Новым Годом!</title>
+    <title>Новогоднее Волшебство | С Новым Годом!</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-    <div class="garland-container top"></div>
-    <div class="garland-container right"></div>
-    <div class="garland-container bottom"></div>
-    <div class="garland-container left"></div>
-
+    <div id="garlands">
+        <div class="garland-line top"></div>
+        <div class="garland-line right"></div>
+        <div class="garland-line bottom"></div>
+        <div class="garland-line left"></div>
+    </div>
+    
     <div id="snow-container"></div>
 
     <main class="card">
         
-        <h1>С Наступающим!</h1>
-        
-        <p>До Нового Года осталось:</p>
+        <header>
+            <i class="fas fa-star-of-life star-icon"></i>
+            <h1>С Наступающим Новым Годом!</h1>
+            <p class="subtitle">Почувствуйте волшебство праздника и начните отсчет до 2026 года.</p>
+        </header>
         
         <div id="countdown">
-            <div class="unit">
-                <span id="days">00</span>
-                <label>дней</label>
             </div>
-            <div class="unit">
-                <span id="hours">00</span>
-                <label>часов</label>
-            </div>
-            <div class="unit">
-                <span id="minutes">00</span>
-                <label>минут</label>
-            </div>
-            <div class="unit">
-                <span id="seconds">00</span>
-                <label>секунд</label>
-            </div>
-        </div>
         
+        <section class="holiday-content">
+            <h2>✨ Наши пожелания</h2>
+            <p>Пусть этот год принесет вам яркие эмоции, вдохновение и успех во всех начинаниях. Больше тепла, радости и незабываемых моментов!</p>
+        </section>
+
         <div class="button-container">
-            <button id="musicToggleBtn" class="btn">
-                <i class="fas fa-play"></i> Музыка
+            <button id="musicToggleBtn" class="btn music-btn">
+                <i class="fas fa-play"></i> Фоновая Музыка
             </button>
-            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn">
-                <i class="fas fa-envelope"></i> Поздравления
+            <a href="https://github.com/ВашеИмяПользователя/ВашРепозиторий" target="_blank" class="btn repo-btn">
+                <i class="fab fa-github"></i> Исходный Код
             </a>
         </div>
         
         <footer>
-            &copy; 2025-2026 Твой Новогодний Проект
+            &copy; 2025-2026 Новогодний Проект | Powered by GitHub Pages
         </footer>
     </main>
 
     <audio id="backgroundMusic" loop>
-        <source src="https://assets.mixkit.co/sfx/preview/mixkit-christmas-magic-game-success-1976.mp3" type="audio/mpeg">
+        <source src="https://github.com/alex-b/christmas-music-loops/raw/main/music/The_Waltz_of_the_Snow_Queen.mp3" type="audio/mpeg">
         Твой браузер не поддерживает аудио.
     </audio>
 
