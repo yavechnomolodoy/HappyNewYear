@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>С Наступающим Новым Годом!</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
     <div class="garland-container top"></div>
+    <div class="garland-container right"></div>
     <div class="garland-container bottom"></div>
+    <div class="garland-container left"></div>
 
     <div id="snow-container"></div>
 
@@ -39,14 +42,23 @@
         </div>
         
         <div class="button-container">
-            <a href="#" class="btn"><span>🎶</span> Новогодняя Музыка</a>
-            <a href="#" class="btn"><span>💌</span> Отправить Открытку</a>
+            <button id="musicToggleBtn" class="btn">
+                <i class="fas fa-play"></i> Музыка
+            </button>
+            <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="btn">
+                <i class="fas fa-envelope"></i> Поздравления
+            </a>
         </div>
         
         <footer>
             &copy; 2025-2026 Твой Новогодний Проект
         </footer>
     </main>
+
+    <audio id="backgroundMusic" loop>
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-christmas-magic-game-success-1976.mp3" type="audio/mpeg">
+        Твой браузер не поддерживает аудио.
+    </audio>
 
     <script src="script.js"></script>
 </body>
