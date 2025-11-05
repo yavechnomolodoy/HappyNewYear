@@ -1,4 +1,3 @@
-
 // Обратный отсчёт до Нового года
 function updateCountdown() {
     const newYear = new Date(`January 1, ${new Date().getFullYear() + 1} 00:00:00`);
