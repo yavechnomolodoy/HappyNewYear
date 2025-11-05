@@ -17,117 +17,61 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
-        linear-gradient(
-            rgba(0, 0, 51, 0.6),
-            rgba(0, 0, 26, 0.8)
-        ),
-        url('images/winter-night.jpg');
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(to bottom, #000033, #1a1a40);
     z-index: -2;
-    background-blend-mode: overlay;
-}
-
-/* Падающий снег */
-.snow {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-}
-
-.snow::before {
-    content: '';
-    position: absolute;
-    top: -10%;
-    left: -10%;
-    width: 120%;
-    height: 120%;
-    background-image:
-        radial-gradient(circle, white 10%, transparent 20%);
-    background-size: 20px 20px;
-    animation: snow-fall 10s linear infinite;
-    opacity: 0.7;
-}
-
-@keyframes snow-fall {
-    0% {
-        transform: translate(0, 0);
-    }
-    100% {
-        transform: translate(15px, 100%);
-    }
 }
 
 /* Гирлянды */
 .garland {
     position: fixed;
+    background: radial-gradient(circle, #ff0000 10%, #ffff00 20%, transparent 30%);
+    background-size: 20px 20px;
+    animation: flicker 1s infinite alternate;
     z-index: -1;
-    pointer-events: none;
 }
 
-.garland::before {
-    content: '';
-    position: absolute;
+.garland.top, .garland.bottom {
+    width: 100%;
+    height: 8px;
+}
+
+.garland.left, .garland.right {
+    height: 100%;
+    width: 8px;
+}
+
+.garland.top {
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-position: 0 0;
-    background-size: 25px 25px;
-    animation: flicker-colors 3s infinite alternate;
 }
 
-.garland.top::before {
-    background-size: 15px 15px;
+.garland.bottom {
+    bottom: 0;
+    left: 0;
 }
 
-.garland.left::before,
-.garland.right::before {
-    background-size: 10px 30px;
-    background-image: radial-gradient(
-        #ff0000 10%,
-        #0000ff 10%,
-        #ffff00 10%,
-        transparent 15%
-    );
+.garland.left {
+    top: 0;
+    left: 0;
 }
 
-.garland.bottom::before {
-    background-size: 8px 8px;
+.garland.right {
+    top: 0;
+    right: 0;
 }
 
-@keyframes flicker-colors {
+@keyframes flicker {
     0% {
-        background-image: radial-gradient(
-            #ff0000 15%,
-            #0000ff 15%,
-            #ffff00 15%,
-            transparent 20%
-        );
         opacity: 0.3;
+        filter: brightness(0.8);
     }
     50% {
-        background-image: radial-gradient(
-            #ff6600 15%,
-            #6600ff 15%,
-            #ffff66 15%,
-            transparent 20%
-        );
         opacity: 1;
+        filter: brightness(1.5);
     }
     100% {
-        background-image: radial-gradient(
-            #cc0000 15%,
-            #0000cc 15%,
-            #cccc00 15%,
-            transparent 20%
-        );
         opacity: 0.5;
+        filter: brightness(1);
     }
 }
 
@@ -143,7 +87,6 @@ body {
 }
 
 h1 {
-    font-family: 'Dancing Script', cursive;
     font-size: 3rem;
     margin-bottom: 20px;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
@@ -153,16 +96,4 @@ h1 {
     font-size: 1.5rem;
     line-height: 1.8;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
-}
-
-/* Оптимизация для слабых устройств */
-@media (prefers-reduced-motion: reduce) {
-    .snow {
-        display: none;
-    }
-    .garland::before {
-        animation: none;
-        background-image: radial-gradient(#ff0000 15%, #0000ff 15%, #ffff00 15%, transparent 20%);
-        opacity: 0.8;
-    }
 }
