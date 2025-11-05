@@ -3,42 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>С Новым годом!</title>
+    <title>С Новым Годом!</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Фон -->
-    <div class="snowfall"></div>
-    <div class="background"></div>
 
-    <!-- Гирлянды (углы + центр) -->
-    <div class="garland-corner top-left"></div>
-    <div class="garland-corner top-right"></div>
-    <div class="garland-center"></div>
+    <div class="garland top"></div>
+    <div class="garland right"></div>
+    <div class="garland bottom"></div>
+    <div class="garland left"></div>
 
-    <!-- Контент -->
-    <main class="content">
-        <h1>С Новым 2026 годом!</h1>
-        <p class="subtitle">Пусть счастье и удача придут в ваш дом!</p>
+    <div id="snow-container"></div>
 
-        <div class="countdown-wrapper">
-            <h2>До Нового года:</h2>
-            <div class="countdown">
-                <div class="time-block">
-                    <span id="days">00</span>
-                    <small>дней</small>
-                </div>
-                <div class="time-block">
-                    <span id="hours">00</span>
-                    <small>часов</small>
-                </div>
-                <div class="time-block">
-                    <span id="minutes">00</span>
-                    <small>минут</small>
-                </div>
-                <div class="time-block">
-                    <span id="seconds">00</span>
-                    <small>секунд</small>
-                </div>
+    <main class="card">
+        <h1>С Новым 2026 Годом!</h1>
+        
+        <p>Пусть этот год будет полон радости, волшебства и тепла.</p>
+        
+        <img src="https://images.pexels.com/photos/314726/pexels-photo-314726.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Красивый зимний пейзаж с домиками и елкой">
+        
+        <footer>
+            &copy; 2025-2026 Твой Новогодний Проект
+        </footer>
+    </main>
 
-                
+    <script src="script.js"></script>
+</body>
+</html>
