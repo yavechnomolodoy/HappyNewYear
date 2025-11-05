@@ -8,26 +8,37 @@
 </head>
 <body>
     <!-- Фон -->
+    <div class="snowfall"></div>
     <div class="background"></div>
 
-    <!-- Гирлянды по периметру -->
-    <div class="garland top"></div>
-    <div class="garland bottom"></div>
-    <div class="garland left"></div>
-    <div class="garland right"></div>
+    <!-- Гирлянды (углы + центр) -->
+    <div class="garland-corner top-left"></div>
+    <div class="garland-corner top-right"></div>
+    <div class="garland-center"></div>
 
+    <!-- Контент -->
+    <main class="content">
+        <h1>С Новым 2026 годом!</h1>
+        <p class="subtitle">Пусть счастье и удача придут в ваш дом!</p>
 
-    <!-- Центральное содержание -->
-    <div class="content">
-        <h1>С Новым годом!</h1>
-        <div id="countdown">
-            <span id="days">00</span> дней<br>
-            <span id="hours">00</span> часов<br>
-            <span id="minutes">00</span> минут<br>
-            <span id="seconds">00</span> секунд
-        </div>
-    </div>
+        <div class="countdown-wrapper">
+            <h2>До Нового года:</h2>
+            <div class="countdown">
+                <div class="time-block">
+                    <span id="days">00</span>
+                    <small>дней</small>
+                </div>
+                <div class="time-block">
+                    <span id="hours">00</span>
+                    <small>часов</small>
+                </div>
+                <div class="time-block">
+                    <span id="minutes">00</span>
+                    <small>минут</small>
+                </div>
+                <div class="time-block">
+                    <span id="seconds">00</span>
+                    <small>секунд</small>
+                </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+                
