@@ -1,8 +1,16 @@
-// Обратный отсчёт до Нового года
 function updateCountdown() {
-    const newYear = new Date(`January 1, ${new Date().getFullYear() + 1} 00:00:00`);
+    // Цель: 1 января следующего года, 00:00:00
+    const nextYear = new Date().getFullYear() + 1;
+    const newYear = new Date(`${nextYear}-01-01T00:00:00`);
+    
     const now = new Date();
     const diff = newYear - now;
+
+    // Если дата уже наступила (для тестирования)
+    if (diff <= 0) {
+        document.getElementById('countdown').innerHTML = '<span>С Новым годом!</span>';
+        return;
+    }
 
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -15,8 +23,8 @@ function updateCountdown() {
     document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
 }
 
-// Обновляем отсчёт каждую секунду
+// Обновляем каждую секунду
 setInterval(updateCountdown, 1000);
 
-// Инициализация при загрузке
+// Первый вызов при загрузке
 window.onload = updateCountdown;
