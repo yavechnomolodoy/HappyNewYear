@@ -1,13 +1,5 @@
-/* Подключаем красивый новогодний шрифт */
-@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300&display=swap');
-
-/* Глобальные переменные для цветов гирлянды */
-:root {
-    --light-color-1: #FFD700; /* Золотой */
-    --light-color-2: #FF4500; /* Красно-оранжевый */
-    --light-color-3: #00BFFF; /* Ярко-синий */
-    --light-color-4: #32CD32; /* Зеленый */
-}
+/* Подключаем красивые шрифты */
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300;400&display=swap');
 
 /* --- Общие стили --- */
 body {
@@ -17,142 +9,176 @@ body {
     background-image: radial-gradient(circle, #1a2b3c, #0d1a26 70%);
     font-family: 'Roboto', sans-serif;
     color: #f0f0f0;
-    
-    /* Центрируем наш контент */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* На весь экран */
-    overflow: hidden; /* Прячем все, что выходит за рамки */
+    min-height: 100vh;
+    overflow: hidden; /* Обязательно, чтобы гирлянды не вылезали */
 }
 
 /* --- Стили для "Открытки" --- */
 .card {
     position: relative;
-    z-index: 10; /* Открытка будет НАД гирляндами */
-    background: rgba(10, 20, 30, 0.75); /* Полупрозрачный фон */
+    z-index: 10;
+    background: rgba(10, 20, 30, 0.85); /* Чуть менее прозрачный */
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 15px;
-    padding: 2.5rem;
+    padding: 2rem 2.5rem;
     max-width: 600px;
     margin: 2rem;
     text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px); /* Эффект "матового стекла" */
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px); /* Эффект "матового стекла" */
 }
 
 .card h1 {
-    font-family: 'Lobster', cursive; /* Применяем наш красивый шрифт */
-    font-size: 3.5rem;
-    color: #FFD700; /* Золотой */
-    margin-top: 0;
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    font-family: 'Lobster', cursive;
+    font-size: 3.8rem;
+    color: #FFD700;
+    margin: 0 0 1rem 0;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
 }
 
 .card p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.6;
-}
-
-.card img {
-    max-width: 100%;
-    border-radius: 10px;
-    margin-top: 1rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
 }
 
 .card footer {
     margin-top: 2rem;
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.4);
 }
 
-/* --- Стили для ГИРЛЯНД --- */
-
-.garland {
-    position: fixed; /* Фиксируем на экране */
-    z-index: 5; /* Гирлянды будут ПОД открыткой, но над фоном */
-    /* Анимация мерцания */
-    animation: twinkle 1.5s infinite alternate;
-}
-
-/* Функция для создания лампочек: 4 цвета, повторяющиеся */
-.lights {
-    background-image: 
-        radial-gradient(circle, var(--light-color-1) 5px, transparent 6px),
-        radial-gradient(circle, var(--light-color-2) 5px, transparent 6px),
-        radial-gradient(circle, var(--light-color-3) 5px, transparent 6px),
-        radial-gradient(circle, var(--light-color-4) 5px, transparent 6px);
-}
-
-/* Верхняя и нижняя гирлянды */
-.garland.top,
-.garland.bottom {
+/* --- НОВЫЙ СТИЛЬ ГИРЛЯНД (v2.0) --- */
+.garland-container {
+    position: fixed;
+    z-index: 20; /* Поверх всего, кроме карточки */
     left: 0;
     right: 0;
-    height: 30px;
-    background-size: 100px 30px; /* 4 лампочки каждые 100px */
-    background-position: 0 0, 25px 0, 50px 0, 75px 0;
+    height: 40px;
+    display: flex; /* Выстраиваем лампочки в ряд */
+    justify-content: center; /* Центрируем, если не влезают */
+    pointer-events: none; /* Не мешают кликать */
 }
-.garland.top { top: 0; }
-.garland.bottom { bottom: 0; }
+.garland-container.top { top: 10px; }
+.garland-container.bottom { bottom: 10px; }
 
-/* Левая и правая гирлянды */
-.garland.left,
-.garland.right {
-    top: 0;
-    bottom: 0;
-    width: 30px;
-    background-size: 30px 100px; /* 4 лампочки каждые 100px по вертикали */
-    background-position: 0 0, 0 25px, 0 50px, 0 75px;
-}
-.garland.left { left: 0; }
-.garland.right { right: 0; }
-
-/* Анимация мерцания гирлянд */
-@keyframes twinkle {
-    0% {
-        opacity: 0.7;
-    }
-    100% {
-        opacity: 1;
-        /* Добавляем легкое "свечение" */
-        filter: brightness(1.2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-    }
+/* Стиль для каждой лампочки */
+.light {
+    width: 12px;
+    height: 12px;
+    margin: 0 8px; /* Расстояние между лампочками */
+    border-radius: 50%;
+    flex-shrink: 0; /* Запрещаем сжиматься */
+    
+    /* Анимация мерцания */
+    animation: flicker 1.5s infinite alternate;
 }
 
+/* "Хаотичность" создается в JS, но мы добавим свечение */
+/* Разные цвета для лампочек */
+.light.color-1 { background: #FFD700; box-shadow: 0 0 10px #FFD700, 0 0 15px #FFD700; }
+.light.color-2 { background: #FF4500; box-shadow: 0 0 10px #FF4500, 0 0 15px #FF4500; }
+.light.color-3 { background: #00BFFF; box-shadow: 0 0 10px #00BFFF, 0 0 15px #00BFFF; }
+.light.color-4 { background: #32CD32; box-shadow: 0 0 10px #32CD32, 0 0 15px #32CD32; }
 
-/* --- Стили для ПАДАЮЩЕГО СНЕГА --- */
+/* Анимация мерцания */
+@keyframes flicker {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0.5; transform: scale(0.95); }
+}
 
+
+/* --- Стили для ТАЙМЕРА --- */
+#countdown {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem; /* Расстояние между блоками */
+    margin-top: 1.5rem;
+}
+#countdown .unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    min-width: 60px;
+}
+#countdown .unit span {
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.1;
+}
+#countdown .unit label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+}
+
+/* --- Стили для КНОПОК --- */
+.button-container {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+.btn {
+    text-decoration: none;
+    color: #fff;
+    background: #c0392b; /* Праздничный красный */
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px; /* Делаем овальными */
+    font-weight: 400;
+    box-shadow: 0 4px 15px rgba(192, 57, 43, 0.4);
+    transition: all 0.3s ease;
+}
+.btn:hover {
+    background: #e74c3c;
+    box-shadow: 0 6px 20px rgba(192, 57, 43, 0.6);
+    transform: translateY(-2px);
+}
+.btn span {
+    margin-right: 0.5rem;
+}
+/* Вторая кнопка другого цвета */
+.btn:last-child {
+    background: #16a085; /* Праздничный зеленый */
+    box-shadow: 0 4px 15px rgba(22, 160, 133, 0.4);
+}
+.btn:last-child:hover {
+    background: #1abc9c;
+    box-shadow: 0 6px 20px rgba(22, 160, 133, 0.6);
+}
+
+
+/* --- Стили для СНЕГА (остаются) --- */
 #snow-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none; /* Позволяет кликать "сквозь" снег */
-    z-index: 100; /* Снег будет поверх всего */
+    pointer-events: none;
+    z-index: 9; /* Снег за карточкой, но перед фоном */
 }
-
 .snowflake {
     position: absolute;
     background: white;
     border-radius: 50%;
-    top: -20px; /* Начинаем над экраном */
-    
-    /* Запускаем анимацию падения */
+    top: -20px;
     animation: fall linear infinite;
 }
-
-/* Анимация падения снежинки */
 @keyframes fall {
     0% {
-        /* Падаем вниз и немного смещаемся вбок */
         transform: translateY(0) translateX(0);
         opacity: 1;
     }
     100% {
-        /* Улетаем за нижний край экрана */
         transform: translateY(105vh) translateX(30px);
         opacity: 0.5;
     }
