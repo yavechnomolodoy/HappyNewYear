@@ -42,6 +42,7 @@ body {
     animation: snow 20s linear infinite;
 }
 
+
 @keyframes snow {
     0% { transform: translate(0, 0); }
     100% { transform: translate(20px, 100vh); }
@@ -62,8 +63,14 @@ body {
     z-index: -1;
 }
 
-.top-left { top: 20px; left: 20px; }
-.top-right { top: 20px; right: 20px; }
+.top-left {
+    top: 20px;
+    left: 20px;
+}
+.top-right {
+    top: 20px;
+    right: 20px;
+}
 
 /* Центральная гирлянда */
 .garland-center {
@@ -87,6 +94,131 @@ body {
 }
 
 @keyframes flicker {
-    0% { opacity: 0.6; filter: brightness(0.8) blur(1px); }
-    50% { opacity: 1; filter: brightness(1.4) blur(0.5px); }
-    100% { opacity: 0.7; filter: brightness(1)
+    0% {
+        opacity: 0.6;
+        filter: brightness(0.8) blur(1px);
+    }
+    50% {
+        opacity: 1;
+        filter: brightness(1.4) blur(0.5px);
+    }
+    100% {
+        opacity: 0.7;
+        filter: brightness(1) blur(1px);
+    }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { opacity: 0.9; }
+}
+
+/* Основной контент */
+.content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 25vh;
+}
+
+h1 {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/* Блок обратного отсчёта */
+.countdown-wrapper {
+    background: rgba(0,0,0,0.3);
+    border-radius: 15px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+.countdown-wrapper h2 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.time-block {
+    text-align: center;
+}
+
+.time-block span {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #ffeb3b;
+    text-shadow: 0 0 5px #ff0;
+}
+
+.time-block small {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Кнопка "Пожелать счастья" */
+.wish-btn {
+    background: linear-gradient(45deg, #e91e63, #9c27b0);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 2rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+.wish-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.wish-btn:active {
+    transform: translateY(0);
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+    .subtitle {
+        font-size: 1.1rem;
+    }
+    .countdown {
+        gap: 0.5rem;
+    }
+    .time-block span {
+        font-size: 2rem;
+    }
+    .wish-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+    .content {
+        padding: 1rem;
+        padding-top: 20vh;
+    }
+}
