@@ -1,4 +1,4 @@
-/* Подключаем красивые шрифты */
+/* Подключаем шрифты */
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300;400;700&family=Bebas+Neue&display=swap');
 
 /* --- Общие стили и Фон --- */
@@ -14,12 +14,12 @@ body {
     overflow: hidden;
     position: relative;
     
-    /* 🖼️ Четкий, атмосферный новогодний фон */
-    background: url('https://images.pexels.com/photos/1721931/pexels-photo-1721931.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center fixed;
+    /* 🖼️ Четкий новогодний фон с ветками и огнями */
+    background: url('https://images.pexels.com/photos/957457/pexels-photo-957457.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center fixed;
     background-size: cover;
 }
 
-/* Эффект легкого затемнения и виньетки для фокуса на карточке */
+/* Эффект затемнения для читаемости текста */
 body::before {
     content: '';
     position: absolute;
@@ -35,16 +35,14 @@ body::before {
 .card {
     position: relative;
     z-index: 10; 
-    background: rgba(10, 20, 30, 0.95); /* Почти непрозрачный, чистый фон */
+    background: rgba(10, 20, 30, 0.95);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 18px; 
-    padding: 3rem 4rem; /* Больше отступов */
+    padding: 3rem 4rem; 
     max-width: 700px; 
-    margin: 2rem;
     text-align: center;
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(15px); 
-    /* Добавляем легкий золотой ободок для праздничности */
     outline: 2px solid #FFD700;
     outline-offset: -10px;
 }
@@ -65,7 +63,7 @@ body::before {
 
 .star-icon {
     font-size: 1.5rem;
-    color: #FFD700;
+    color: #87CEEB; /* Цвет снежинки */
     margin-bottom: 1rem;
     animation: rotate 10s linear infinite;
 }
@@ -73,24 +71,6 @@ body::before {
 @keyframes rotate {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
-}
-
-/* --- Новогодний контент (пожелания) --- */
-.holiday-content {
-    margin: 3rem 0;
-    padding: 1.5rem;
-    border-top: 1px dashed rgba(255, 255, 255, 0.3);
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
-}
-.holiday-content h2 {
-    font-family: 'Bebas Neue', cursive;
-    font-size: 1.8rem;
-    color: #2ecc71; /* Зеленый акцент */
-    margin-top: 0;
-}
-.holiday-content p {
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.7;
 }
 
 /* --- ТАЙМЕР --- */
@@ -101,8 +81,6 @@ body::before {
     margin-bottom: 2rem;
 }
 #countdown .unit {
-    /* ... стили таймера остаются из v3.0, чтобы не повторять длинный код ... */
-    /* ... (улучшенные стили таймера) ... */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -116,7 +94,6 @@ body::before {
 #countdown .unit span {
     font-family: 'Bebas Neue', sans-serif; 
     font-size: 3.5rem; 
-    font-weight: 700; 
     color: #FFEB3B; 
     line-height: 1;
     text-shadow: 0 0 10px rgba(255, 235, 59, 0.6);
@@ -128,49 +105,6 @@ body::before {
     margin-top: 0.5rem;
 }
 
-
-/* --- 💡 ПРОФЕССИОНАЛЬНЫЕ ГИРЛЯНДЫ (v4.0) --- */
-#garlands {
-    z-index: 5;
-}
-
-.garland-line {
-    position: fixed;
-    /* Это наша "нить" */
-    background: rgba(100, 100, 100, 0.5); 
-    z-index: 5;
-    pointer-events: none;
-    /* Создаем лампочки через псевдоэлементы */
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.garland-line.top, .garland-line.bottom {
-    left: 0;
-    right: 0;
-    height: 4px; /* Толщина нити */
-}
-.garland-line.top { top: 0; }
-.garland-line.bottom { bottom: 0; }
-
-.garland-line.left, .garland-line.right {
-    top: 0;
-    bottom: 0;
-    width: 4px; /* Толщина нити */
-    flex-direction: column;
-}
-.garland-line.left { left: 0; }
-.garland-line.right { right: 0; }
-
-/* Создание лампочек на нити */
-.garland-line::before, .garland-line::after {
-    content: '';
-    position: absolute;
-    /* Лампочки создаются с помощью многослойной тени и анимации в JS */
-    /* Здесь мы просто задаем им базовые размеры и цвета, которые будут переопределены JS-классами */
-}
-
-
 /* --- КНОПКИ --- */
 .button-container {
     margin-top: 2.5rem;
@@ -179,7 +113,6 @@ body::before {
     gap: 1.2rem;
 }
 .btn {
-    /* ... стили кнопок остаются из v3.0, но без градиента для большей "чистоты" ... */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -196,13 +129,13 @@ body::before {
 }
 
 .music-btn {
-    background: #e74c3c; /* Красный */
+    background: #e74c3c; 
 }
 .music-btn:hover {
     background: #c0392b;
     transform: translateY(-2px);
 }
-.music-btn.playing { /* Зеленый, когда играет */
+.music-btn.playing { 
     background: #2ecc71; 
 }
 .music-btn.playing:hover {
@@ -210,7 +143,7 @@ body::before {
 }
 
 .repo-btn {
-    background: #34495e; /* Темно-серый для GitHub */
+    background: #34495e; 
 }
 .repo-btn:hover {
     background: #2c3e50;
@@ -222,8 +155,36 @@ body::before {
     font-size: 1.1rem;
 }
 
+/* --- ГИРЛЯНДЫ (Стилизация нити) --- */
+.garland-line {
+    position: fixed;
+    background: rgba(100, 100, 100, 0.4); /* Полупрозрачная нить */
+    z-index: 5;
+    pointer-events: none;
+    display: flex;
+    /* Убедимся, что лампочки видны */
+}
+.garland-line.top, .garland-line.bottom { height: 2px; }
+.garland-line.left, .garland-line.right { width: 2px; flex-direction: column; }
+.garland-line.top { top: 0; }
+.garland-line.bottom { bottom: 0; }
+.garland-line.left { left: 0; }
+.garland-line.right { right: 0; }
 
-/* --- ❄️ НАСТОЯЩИЙ СНЕГ (v4.0) --- */
+/* Стиль для лампочки (создается JS) */
+.light-bulb {
+    position: absolute;
+    z-index: 6; /* Над нитью */
+    animation-name: twinkle !important; /* Убедимся, что анимация работает */
+}
+
+@keyframes twinkle {
+    0% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 0.3; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1.05); }
+}
+
+/* --- СНЕГ --- */
 #snow-container {
     position: fixed;
     top: 0;
@@ -235,12 +196,27 @@ body::before {
 }
 .snowflake {
     position: absolute;
-    /* Градиент для реалистичного объема и мягкости */
-    background: radial-gradient(circle, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, 0.7) 40%, transparent 80%);
+    /* Упрощенный стиль для надежности */
+    background: white; 
     border-radius: 50%;
     top: -20px;
     animation: fall linear infinite;
-    filter: blur(0.3px); /* Еще более легкое размытие */
 }
-/* Мы добавим больше хаотичности в JS, используя разные анимации */
-/* ... (см. JS для анимации падения) ... */
+
+/* Дополнительные стили для контента */
+.holiday-content {
+    margin: 3rem 0;
+    padding: 1.5rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.3);
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+}
+.holiday-content h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 1.8rem;
+    color: #2ecc71; 
+    margin-top: 0;
+}
+.holiday-content p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
+}
