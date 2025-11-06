@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     
+    // Запускаем все функции
     createSnowflakes();
     createGarlands();
     startCountdown();
     setupMusicPlayer();
 
-    // Заполняем таймер нужными HTML-элементами, так как убрали их из index.html
+    // Заполняем таймер HTML-элементами
     const countdownHTML = `
         <div class="unit"><span id="days">00</span><label>дней</label></div>
         <div class="unit"><span id="hours">00</span><label>часов</label></div>
@@ -13,60 +14,42 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="unit"><span id="seconds">00</span><label>секунд</label></div>
     `;
     document.getElementById('countdown').innerHTML = countdownHTML;
-
 });
 
 
 /*
- * --- Функция 1: СОЗДАНИЕ СНЕЖИНОК (очень реалистичные) ---
+ * --- Функция 1: СОЗДАНИЕ СНЕЖИНОК (Надежная версия) ---
  */
 function createSnowflakes() {
     const snowContainer = document.getElementById('snow-container');
-    const numberOfSnowflakes = 200; // Много снега
-    const animationTypes = ['fall-slow', 'fall-medium', 'fall-fast'];
+    const numberOfSnowflakes = 150; 
 
-    // Создаем стили анимации динамически, чтобы они были хаотичными
-    const styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
-    document.head.appendChild(styleSheet);
+    // Добавляем простую CSS-анимацию падения в head, если ее нет
+    if (!document.querySelector('style[data-name="snowflake-fall"]')) {
+        const styleSheet = document.createElement("style");
+        styleSheet.setAttribute('data-name', 'snowflake-fall');
+        styleSheet.innerHTML = `
+            @keyframes fall {
+                0% { transform: translateY(0vh) translateX(0vw); opacity: 0.9; }
+                100% { transform: translateY(105vh) translateX(10vw); opacity: 0.5; }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    }
     
-    // Генерируем анимацию в JS для 3 разных типов падения
-    const keyframes = `
-        @keyframes fall-slow {
-            0% { transform: translateY(0vh) translateX(0vw); }
-            100% { transform: translateY(105vh) translateX(5vw); }
-        }
-        @keyframes fall-medium {
-            0% { transform: translateY(0vh) translateX(0vw); }
-            100% { transform: translateY(105vh) translateX(-5vw); }
-        }
-        @keyframes fall-fast {
-            0% { transform: translateY(0vh) translateX(0vw); }
-            100% { transform: translateY(105vh) translateX(0vw); }
-        }
-    `;
-    styleSheet.sheet.insertRule(keyframes, 0);
-
-
     for (let i = 0; i < numberOfSnowflakes; i++) {
         let flake = document.createElement('div');
         flake.classList.add('snowflake');
 
         flake.style.left = Math.random() * 100 + 'vw';
+        flake.style.animationDuration = (Math.random() * 8 + 10) + 's';
+        flake.style.animationDelay = Math.random() * -15 + 's';
         
-        // Хаотичная скорость падения
-        flake.style.animationDuration = (Math.random() * 10 + 10) + 's';
-        flake.style.animationDelay = Math.random() * -20 + 's';
-        
-        // Разные размеры
-        let size = (Math.random() * 4 + 3) + 'px';
+        let size = (Math.random() * 3 + 2) + 'px';
         flake.style.width = size;
         flake.style.height = size;
         
         flake.style.opacity = Math.random() * 0.7 + 0.3;
-
-        // Назначаем одну из 3 анимаций
-        flake.style.animationName = animationTypes[Math.floor(Math.random() * 3)];
 
         snowContainer.appendChild(flake);
     }
@@ -74,25 +57,24 @@ function createSnowflakes() {
 
 
 /*
- * --- Функция 2: СОЗДАНИЕ ГИРЛЯНД (v4.0) ---
+ * --- Функция 2: СОЗДАНИЕ ГИРЛЯНД (Надежная версия) ---
  */
 function createGarlands() {
     const containers = document.querySelectorAll('.garland-line');
-    const colors = ['#FFD700', '#FF6347', '#87CEEB', '#ADFF2F']; // Цвета ламп
-    const lightSize = '12px'; // Размер лампочки
+    const colors = ['#FFD700', '#FF6347', '#87CEEB', '#ADFF2F']; 
+    const lightSize = '10px'; 
+    const spacing = 30; // Расстояние между лампочками
 
     containers.forEach(container => {
         let isHorizontal = container.classList.contains('top') || container.classList.contains('bottom');
         let totalLength = isHorizontal ? window.innerWidth : window.innerHeight;
-        let spacing = 35; // Расстояние между лампочками
         let numberOfLights = Math.floor(totalLength / spacing);
 
         for (let i = 0; i < numberOfLights; i++) {
-            let light = document.createElement('span'); // Используем span для лампочки
+            let light = document.createElement('span');
             light.classList.add('light-bulb');
             
-            // Выбор цвета
-            const color = colors[Math.floor(Math.random() * colors.length)];
+            const color = colors[i % colors.length]; // Цикличное повторение цветов
             
             light.style.backgroundColor = color;
             light.style.width = lightSize;
@@ -103,38 +85,19 @@ function createGarlands() {
             // Позиционирование лампочки
             if (isHorizontal) {
                 light.style.left = (i * spacing + (spacing/2)) + 'px';
-                light.style.top = container.classList.contains('top') ? '5px' : '-5px'; // Смещение от нити
+                light.style.top = container.classList.contains('top') ? '5px' : '-5px'; 
             } else {
                 light.style.top = (i * spacing + (spacing/2)) + 'px';
-                light.style.left = container.classList.contains('left') ? '5px' : '-5px'; // Смещение от нити
+                light.style.left = container.classList.contains('left') ? '5px' : '-5px'; 
             }
 
-            // Создание тени и мерцания в JS для хаоса
+            // Мерцание
             light.style.boxShadow = `0 0 5px ${color}, 0 0 10px ${color}, 0 0 15px rgba(255, 255, 255, 0.5)`;
-            
-            light.style.animationName = 'twinkle';
-            light.style.animationDuration = (Math.random() * 1.5 + 0.8) + 's';
-            light.style.animationDelay = (Math.random() * 2) + 's';
-            light.style.animationIterationCount = 'infinite';
-            light.style.animationDirection = 'alternate';
+            light.style.animation = `twinkle ${(Math.random() * 1.5 + 0.8)}s infinite alternate`;
             
             container.appendChild(light);
         }
     });
-
-    // Создаем CSS-анимацию мерцания для лампочек
-    const styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
-    document.head.appendChild(styleSheet);
-    
-    const twinkleKeyframes = `
-        @keyframes twinkle {
-            0% { opacity: 0.8; transform: scale(1); }
-            50% { opacity: 0.5; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1.05); }
-        }
-    `;
-    styleSheet.sheet.insertRule(twinkleKeyframes, 0);
 }
 
 
@@ -142,7 +105,7 @@ function createGarlands() {
  * --- Функция 3: ТАЙМЕР ОБРАТНОГО ОТСЧЕТА ---
  */
 function startCountdown() {
-    const countDownDate = new Date("Jan 1, 2026 00:00:00").getTime(); // 2026 год
+    const countDownDate = new Date("Jan 1, 2026 00:00:00").getTime(); 
 
     const elements = {
         days: document.getElementById('days'),
@@ -150,9 +113,11 @@ function startCountdown() {
         minutes: document.getElementById('minutes'),
         seconds: document.getElementById('seconds')
     };
-    const card = document.querySelector('.card');
 
     const interval = setInterval(function() {
+        // Проверяем, что элементы существуют, прежде чем обновлять их (для надежности)
+        if (!elements.days) return; 
+        
         const now = new Date().getTime();
         const distance = countDownDate - now;
 
@@ -161,7 +126,6 @@ function startCountdown() {
         const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const s = Math.floor((distance % (1000 * 60)) / 1000);
 
-        // Обновление HTML
         elements.days.innerText = String(d).padStart(2, '0');
         elements.hours.innerText = String(h).padStart(2, '0');
         elements.minutes.innerText = String(m).padStart(2, '0');
@@ -170,8 +134,6 @@ function startCountdown() {
         if (distance < 0) {
             clearInterval(interval);
             document.getElementById('countdown').innerHTML = '<h2>С НОВЫМ ГОДОМ!</h2>';
-            document.querySelector('.subtitle').innerText = 'Празднуем наступление нового, волшебного 2026 года!';
-            document.querySelector('.holiday-content').style.display = 'none';
         }
     }, 1000);
 }
@@ -185,21 +147,19 @@ function setupMusicPlayer() {
     const backgroundMusic = document.getElementById('backgroundMusic');
     const musicIcon = musicToggleBtn.querySelector('i');
 
+    if (!musicToggleBtn || !backgroundMusic) return;
+
     let isPlaying = false; 
 
     musicToggleBtn.addEventListener('click', function() {
-        if (!backgroundMusic || !backgroundMusic.src.includes('http')) return; // Проверка на наличие музыки
-
         if (isPlaying) {
             backgroundMusic.pause();
             musicIcon.classList.remove('fa-pause');
             musicIcon.classList.add('fa-play');
             musicToggleBtn.classList.remove('playing');
         } else {
-            // Использование play() внутри обработчика клика (взаимодействие с пользователем)
             backgroundMusic.play().catch(e => {
                 console.error("Не удалось воспроизвести музыку:", e);
-                // Можно добавить уведомление для пользователя
             });
             musicIcon.classList.remove('fa-play');
             musicIcon.classList.add('fa-pause');
